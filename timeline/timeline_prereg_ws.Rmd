@@ -1,0 +1,55 @@
+---
+output: html_document
+---
+
+<style>
+.main-container {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.vis-item {
+    position: absolute;
+    color: #37414b;
+    border-color: #a51e41;
+    border-width: 2px;
+    background-color: rgb(244,232,229);
+    display: inline-block;
+}
+
+.vis-labelset .vis-label {
+    left: 0;
+    top: 0;
+    width: 100%;
+    color: #a41e41;
+    border-bottom: 1px solid #bfbfbf;
+    font-weight: bold;
+}
+body {font-family: "IBM Plex Sans"}
+
+.vis-current-time {
+
+    background-color: #a51e41;
+    width: 2px;
+    z-index: 1;
+}
+
+
+
+</style>
+
+## Zeitlicher Ablauf
+  
+```{r, echo = F, message = F}
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())  ##
+library(timevis)
+timevis(data = readxl::read_xlsx("timelinedata.xlsx"),
+        groups = data.frame(id = 1:2, 
+                            content = c("Weshalb<br>präregistrieren?", "Wie<br>präregistrieren?")),
+        fit = T,
+        width = "100%",
+        options = list(locale = c("de"), editable = TRUE),
+        showZoom = F)
+
+```
